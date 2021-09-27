@@ -1,12 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
 
 // 连接URL
-const url = 'mongodb://172.17.0.2:27017';
+const url = 'mongodb://db:27017';
 
 // 数据库名称
 const dbName = 'nodejsBook';
 
-const MONGODB_URI='mongodb://172.17.0.2:27017/nodejsBook';
+const MONGODB_URI='mongodb://db:27017/nodejsBook';
 
 // 创建MongoClient客户端
 const client = new MongoClient(url);
