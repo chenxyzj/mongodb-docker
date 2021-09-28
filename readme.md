@@ -33,7 +33,33 @@ docker exec -it mongodb-docker_nodejs-test_1 /bin/sh
 ## 5. 停止和删除容器
 docker-compose down -v
 
-
+# 三、测试低版本的mongodb@2.2.33 node包导致的出错
+## 1. 前面在使用nodejs访问mongodb数据库时使用了低版本的mongodb@2.2.33包
+      使得程序运行报错，悬而未决，一直想找到问题，特地重新测试了以下确认时这个版本太低了。错误记录如下：
+      /src # node example.js
+``` 
+Error happened!  TypeError [ERR_INVALID_ARG_TYPE]: The "url" argument must be of type string. Received undefined
+    at validateString (internal/validators.js:124:11)
+    at Url.parse (url.js:170:3)
+    at Object.urlParse [as parse] (url.js:157:13)
+    at module.exports (/src/node_modules/mongodb/lib/url_parser.js:16:23)
+    at connect (/src/node_modules/mongodb/lib/mongo_client.js:486:16)
+    at /src/node_modules/mongodb/lib/mongo_client.js:240:7
+    at new Promise (<anonymous>)
+    at MongoClient.connect (/src/node_modules/mongodb/lib/mongo_client.js:236:12)
+    at connect (/src/example.js:10:22)
+    at Object.<anonymous> (/src/example.js:5:1) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+Closing mongodb connection.
+(node:44) UnhandledPromiseRejectionWarning: TypeError: client.close is not a function
+    at connect (/src/example.js:17:16)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:44) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:44) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+```  
+ 2. 记录下这次测试，将该问题消除。
+ 
 [ 参考 ]
 1. https://www.cnblogs.com/soymilk2019/p/11553541.html
 2. https://blog.csdn.net/weixin_42368421/article/details/108756157
