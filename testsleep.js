@@ -1,5 +1,5 @@
 console.log('Before sleep');
-sleep(3000, function() {
+sleep(3000, function disp() {
     console.log('After sleep');
 }); 
 
