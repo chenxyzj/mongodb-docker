@@ -1,10 +1,6 @@
-doAsyncJob();
-
-async function doAsyncJob(){
-    console.log('Before sleep');
-    await sleep(3000);
-    console.log('After sleep');
-}
+console.log('Before sleep');
+sleep(3000)
+  .then(() => console.log('After sleep'));
 
 
 function sleep(ms) {
