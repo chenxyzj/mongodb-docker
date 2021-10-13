@@ -86,3 +86,4 @@ https://www.cnblogs.com/kelelipeng/p/11987144.html
 https://kindacode.com/article/node-js-how-to-use-import-and-require-in-the-same-file/
 https://stackoverflow.com/questions/62488898/node-js-syntaxerror-cannot-use-import-statement-outside-a-module
 https://dmitripavlutin.com/ecmascript-modules-nodejs/
+https://pakstech.com/blog/node-import-error/
