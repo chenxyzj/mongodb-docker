@@ -44,3 +44,45 @@ docker-compose down -v
 7. https://www.shangmayuan.com/a/f251ad2cd37e49f58bca298a.html
 8. https://www.npmjs.com/package/mongodb
 9. https://stackoverflow.com/questions/35154441/docker-compose-links-vs-external-links
+
+# 四、测试node-fetch和promise
+## 1. fetch是浏览器javascript可以使用的API，nodejs中没有，如果要使用就需要安装node-fetch第三方模块
+      npm i node-fetch
+      测试时默认安装的是3.0.0最新版本，但属于ES module，不能用require导入，需要使用
+      import fetch from 'node-fetch';
+      并且还要在package.json中增加"type": "module"
+## 2. 如果要使用require导入，需要使用node-fetch@2.6.5版本，但package.json中要用"type": "commonjs"
+
+## 3. 如果json文件中要进行注释，可以考虑使用重复的key的方式，例如：
+      "type": "module",
+      "type": "commonjs"
+      这样后面的覆盖前面，后面键值对起作用。
+
+## 4. npm如果要安装同一个包的不同版本，可以使用别名alias
+        npm i <alias>@npm:<packageName>@版本
+        # 例子
+        npm i antd3@npm:antd@3
+        npm i antd4@npm:antd@4
+## 5. 此次测试安装node-fetch的2.6.5版和3.0.0版
+        npm uninstall node-fetch
+
+        npm install node-fetch@2.6.5
+        npm install node-fetch3@npm:node-fetch@3.0.0
+## 6. 要在同一个nodejs文件中使用require和import则需要
+    package.json中"type": "module"
+    然后可以使用import fetch3 from 'node-fetch3'
+    在js文件中定义require
+    // Define "require"
+    import { createRequire } from "module";
+    const require = createRequire(import.meta.url);
+    之后，就可以使用require导入commonjs的模块了：
+    const fetch = require('node-fetch');
+## 7. nodejs支持在ES module中导入以前的require导入的模块
+    import fetch from 'node-fetch';
+
+## 8. 参考
+https://www.cnblogs.com/amiezhang/p/13166240.html
+https://www.cnblogs.com/kelelipeng/p/11987144.html
+https://kindacode.com/article/node-js-how-to-use-import-and-require-in-the-same-file/
+https://stackoverflow.com/questions/62488898/node-js-syntaxerror-cannot-use-import-statement-outside-a-module
+https://dmitripavlutin.com/ecmascript-modules-nodejs/
