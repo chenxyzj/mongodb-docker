@@ -1,4 +1,5 @@
-const {MongoClient} = require("mongodb");
+import {MongoClient} from "mongodb";
+// const {MongoClient} = require("mongodb");
 
 const uri = 'mongodb://db:27017';
 

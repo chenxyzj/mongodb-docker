@@ -1,4 +1,5 @@
-const MongoClient = require('mongodb').MongoClient;
+import {MongoClient} from 'mongodb';
+// const MongoClient = require('mongodb').MongoClient;
 
 // 连接URL
 const url = 'mongodb://db:27017';

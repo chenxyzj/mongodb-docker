@@ -1,6 +1,8 @@
-require("sslkeylog").hookAll();
+import {MongoClient} from 'mongodb';
 
-const MongoClient = require('mongodb').MongoClient;
+// require("sslkeylog").hookAll();
+
+// const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb://db:27017"
 
 const client = new MongoClient(uri, { useNewUrlParser: true });
